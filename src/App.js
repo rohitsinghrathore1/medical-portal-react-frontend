@@ -1,14 +1,27 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
+
 import './App.css';
 import RouterComp from "./route";
 
-import Header from "./components/header";
+// import Header from "./components/header";
 
-const App = ()=>(
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import purple from 'material-ui/colors/purple';
+import green from 'material-ui/colors/green';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: purple
+  }});
+
+
+const App = ({history})=>(
+  <MuiThemeProvider theme={theme}>
     <div className="app">
-      <Header/>
-      <RouterComp/>
+      <RouterComp history={history}/>
     </div>
+  </MuiThemeProvider>
   )
 
-export default App;
+export default withRouter(App);

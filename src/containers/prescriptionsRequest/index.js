@@ -2,6 +2,7 @@ import React from 'react';
 
 import makeApiCall from "../../services/apiCallService";
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
+import Button from 'material-ui/Button';
 
 
 
@@ -13,26 +14,30 @@ class Prescriptions extends React.Component {
 
   constructor(){
     super();
-    this.getPrescriptionsSuccessCb = this.getPrescriptionsSuccessCb.bind(this);
-    this.getPrescriptionsFailureCb = this.getPrescriptionsFailureCb.bind(this);
+    this.getAllPrescriptionsSuccessCb = this.getAllPrescriptionsSuccessCb.bind(this);
+    this.getAllPrescriptionsFailureCb = this.getAllPrescriptionsFailureCb.bind(this);
   }
 
-  getPrescriptionsSuccessCb(res){
+  getAllPrescriptionsSuccessCb(res){
     console.log(res);
     this.setState({
       myPrescriptions: res.records
     })
   }
 
-  getPrescriptionsFailureCb(res){
+  getAllPrescriptionsFailureCb(res){
      console.log(res)
+  }
+
+  requestPrescriptionAccess(id){
+    console.log("requestPrescriptionAccess");
   }
 
   componentDidMount() {
     const reqObj = {
-      endPoint: "getMyPrescriptions",
-      successCb: this.getPrescriptionsSuccessCb,
-      failureCb: this.getPrescriptionsFailureCb
+      endPoint: "getAllPrescriptions",
+      successCb: this.getAllPrescriptionsSuccessCb,
+      failureCb: this.getAllPrescriptionsFailureCb
     }
     makeApiCall(reqObj)
   }
@@ -46,7 +51,9 @@ class Prescriptions extends React.Component {
         <TableHead>
           <TableRow>
             <TableCell>S.No.</TableCell>
-            <TableCell>Description</TableCell>
+            <TableCell>Prescription Title</TableCell>
+            <TableCell>Request Access</TableCell>
+
           </TableRow>
         </TableHead>
         <TableBody>
@@ -54,7 +61,10 @@ class Prescriptions extends React.Component {
             return (
               <TableRow key={data.id}>
                 <TableCell>{i+1}</TableCell>
-                <TableCell >{data.prescription}</TableCell>
+                <TableCell >{data.title}</TableCell>
+                <TableCell >
+                  <Button size="small" color="primary" onClick={()=>this.requestPrescriptionAccess(data.id)}>Request Access</Button>
+                </TableCell>
               </TableRow>
             );
           })}

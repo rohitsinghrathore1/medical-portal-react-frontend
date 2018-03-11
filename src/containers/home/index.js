@@ -1,8 +1,10 @@
 import React from 'react';
+import LoginSignup from "../../components/loginSignup";
 
-const Home = () => (
+const Home = ({history}) => (
   <div>
     <h2>Home</h2>
+    <LoginSignup history={history} />
   </div>
 )
 
