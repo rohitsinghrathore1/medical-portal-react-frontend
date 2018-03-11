@@ -1,9 +1,17 @@
 import config from "../configs/config";
 import apiEndPoints from "./apiEndPoints";
 
+const getUrlWithParams = (url, pathVariables) => {
+  pathVariables.map(item => {
+    url = url.replace(item.key, item.val);
+    return item; // returning just for eslint
+  });
+  return url;
+};
+
 const makeApiCall = (reqObj)=>{
 
-  const url = config.baseUrl + apiEndPoints[reqObj.endPoint];
+  let url = config.baseUrl + apiEndPoints[reqObj.endPoint];
   const requestParams = {
       method: reqObj.method || "GET",
       headers: {
@@ -18,6 +26,11 @@ const makeApiCall = (reqObj)=>{
     }
     // mode: 'cors', // no-cors, cors, *same-origin
     // redirect: 'follow', // *manual, follow, error  
+
+    if(reqObj.params){
+      url = getUrlWithParams(url, reqObj.params);
+    }
+
  fetch(url, requestParams)
   .then(response => {
       if (response.status>=400) {

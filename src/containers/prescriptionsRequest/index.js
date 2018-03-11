@@ -6,7 +6,7 @@ import Button from 'material-ui/Button';
 
 
 
-class Prescriptions extends React.Component {
+class PrescriptionsRequest extends React.Component {
 
   state = {
     myPrescriptions: []
@@ -16,6 +16,15 @@ class Prescriptions extends React.Component {
     super();
     this.getAllPrescriptionsSuccessCb = this.getAllPrescriptionsSuccessCb.bind(this);
     this.getAllPrescriptionsFailureCb = this.getAllPrescriptionsFailureCb.bind(this);
+  }
+
+  componentDidMount() {
+    const reqObj = {
+      endPoint: "getAllPrescriptions",
+      successCb: this.getAllPrescriptionsSuccessCb,
+      failureCb: this.getAllPrescriptionsFailureCb
+    }
+    makeApiCall(reqObj)
   }
 
   getAllPrescriptionsSuccessCb(res){
@@ -29,17 +38,9 @@ class Prescriptions extends React.Component {
      console.log(res)
   }
 
-  requestPrescriptionAccess(id){
+  viewPrescriptionDetails(id){
     console.log("requestPrescriptionAccess");
-  }
-
-  componentDidMount() {
-    const reqObj = {
-      endPoint: "getAllPrescriptions",
-      successCb: this.getAllPrescriptionsSuccessCb,
-      failureCb: this.getAllPrescriptionsFailureCb
-    }
-    makeApiCall(reqObj)
+    this.props.history.push("/prescription-details/"+id);
   }
 
   render() {
@@ -52,7 +53,7 @@ class Prescriptions extends React.Component {
           <TableRow>
             <TableCell>S.No.</TableCell>
             <TableCell>Prescription Title</TableCell>
-            <TableCell>Request Access</TableCell>
+            <TableCell>View/Request Access</TableCell>
 
           </TableRow>
         </TableHead>
@@ -63,7 +64,7 @@ class Prescriptions extends React.Component {
                 <TableCell>{i+1}</TableCell>
                 <TableCell >{data.title}</TableCell>
                 <TableCell >
-                  <Button size="small" color="primary" onClick={()=>this.requestPrescriptionAccess(data.id)}>Request Access</Button>
+                  <Button size="small" color="primary" onClick={()=>this.viewPrescriptionDetails(data.id)}>View Details</Button>
                 </TableCell>
               </TableRow>
             );
@@ -76,4 +77,4 @@ class Prescriptions extends React.Component {
  }
 }
 
-export default Prescriptions;
+export default PrescriptionsRequest;

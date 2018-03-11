@@ -49,7 +49,8 @@ class Header extends React.Component {
               <div><Link to="/">Home</Link></div>
               <div><Link to="/prescriptions">Prescriptions</Link></div>
               <div><Link to="/medical-records">MedicalRecords</Link></div>
-              <div><Link to="/prescriptions-access">Request Prescriptions Access</Link></div>
+              <div><Link to="/prescriptions-access">View/Request Prescriptions Access</Link></div>
+              <div><Link to="/approve-reject-prescriptions">Approve-Reject Prescriptions</Link></div>              
             </div>
           </Drawer>
 

@@ -17,6 +17,15 @@ class Prescriptions extends React.Component {
     this.getPrescriptionsFailureCb = this.getPrescriptionsFailureCb.bind(this);
   }
 
+  componentDidMount() {
+    const reqObj = {
+      endPoint: "getMyPrescriptions",
+      successCb: this.getPrescriptionsSuccessCb,
+      failureCb: this.getPrescriptionsFailureCb
+    }
+    makeApiCall(reqObj)
+  }
+
   getPrescriptionsSuccessCb(res){
     console.log(res);
     this.setState({
@@ -28,15 +37,6 @@ class Prescriptions extends React.Component {
      console.log(res)
   }
 
-  componentDidMount() {
-    const reqObj = {
-      endPoint: "getMyPrescriptions",
-      successCb: this.getPrescriptionsSuccessCb,
-      failureCb: this.getPrescriptionsFailureCb
-    }
-    makeApiCall(reqObj)
-  }
-
   render() {
    return (
     <div>
@@ -46,6 +46,7 @@ class Prescriptions extends React.Component {
         <TableHead>
           <TableRow>
             <TableCell>S.No.</TableCell>
+             <TableCell>Title</TableCell>
             <TableCell>Description</TableCell>
           </TableRow>
         </TableHead>
@@ -54,6 +55,7 @@ class Prescriptions extends React.Component {
             return (
               <TableRow key={data.id}>
                 <TableCell>{i+1}</TableCell>
+                 <TableCell>{data.title}</TableCell>
                 <TableCell >{data.prescription}</TableCell>
               </TableRow>
             );

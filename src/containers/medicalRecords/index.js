@@ -16,6 +16,15 @@ class MedicalRecords extends React.Component {
     this.getMedicalRecordsFailureCb = this.getMedicalRecordsFailureCb.bind(this);
   }
 
+  componentDidMount() {
+    const reqObj = {
+      endPoint: "getMedicalRecords",
+      successCb: this.getMedicalRecordsSuccessCb,
+      failureCb: this.getMedicalRecordsFailureCb
+    }
+    makeApiCall(reqObj)
+  }
+
   getMedicalRecordsSuccessCb(res){
     console.log(res)
     this.setState({
@@ -25,15 +34,6 @@ class MedicalRecords extends React.Component {
 
   getMedicalRecordsFailureCb(res){
      console.log(res)
-  }
-
-  componentDidMount() {
-    const reqObj = {
-      endPoint: "getMedicalRecords",
-      successCb: this.getMedicalRecordsSuccessCb,
-      failureCb: this.getMedicalRecordsFailureCb
-    }
-    makeApiCall(reqObj)
   }
 
   render() {
