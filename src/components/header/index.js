@@ -5,9 +5,7 @@ import Typography from "material-ui/Typography";
 import IconButton from "material-ui/IconButton";
 import MenuIcon from "material-ui-icons/Menu";
 import Drawer from "material-ui/Drawer";
-import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
-
-import { Link } from "react-router-dom";
+import List, { ListItem, ListItemText } from "material-ui/List";
 
 class Header extends React.Component {
   state = {
@@ -85,26 +83,6 @@ class Header extends React.Component {
                 />
               </ListItem>
             </List>
-
-            <div>
-              <Link to="/">Home</Link>
-            </div>
-            <div>
-              <Link to="/prescriptions">Prescriptions</Link>
-            </div>
-            <div>
-              <Link to="/medical-records">MedicalRecords</Link>
-            </div>
-            <div>
-              <Link to="/prescriptions-access">
-                View/Request Prescriptions Access
-              </Link>
-            </div>
-            <div>
-              <Link to="/approve-reject-prescriptions">
-                Approve-Reject Prescriptions
-              </Link>
-            </div>
           </div>
         </Drawer>
       </div>
