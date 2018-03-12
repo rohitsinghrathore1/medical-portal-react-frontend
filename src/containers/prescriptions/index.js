@@ -42,7 +42,7 @@ class Prescriptions extends React.Component {
   render() {
     return (
       <div>
-        <h2>Prescriptions</h2>
+        <h2>My Prescriptions</h2>
 
         <Table className="records-table">
           <TableHead>

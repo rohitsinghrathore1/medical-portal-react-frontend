@@ -21,7 +21,6 @@ class App extends React.Component {
   };
 
   setUser(val) {
-    debugger;
     this.setState({
       user: val
     });
@@ -33,7 +32,7 @@ class App extends React.Component {
         <div className="app">
           <RouterComp
             history={this.props.history}
-            setUser={(val) => this.setUser(val)}
+            setUser={val => this.setUser(val)}
             user={this.state.user}
           />
         </div>

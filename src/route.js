@@ -41,12 +41,20 @@ const RouterComp = ({ history, setUser, user }) => (
     <Route
       path="/prescriptions-access"
       render={() =>
-        isAuthorized(user) ? <PrescriptionsRequest /> : redirect()}
+        isAuthorized(user) ? (
+          <PrescriptionsRequest history={history} />
+        ) : (
+          redirect()
+        )}
     />
     <Route
       path="/prescription-details/:id"
-      render={() =>
-        isAuthorized(user) ? <PrescriptionsDetails /> : redirect()}
+      render={({ match }) =>
+        isAuthorized(user) ? (
+          <PrescriptionsDetails match={match} />
+        ) : (
+          redirect()
+        )}
     />
     <Route
       path="/approve-reject-prescriptions"

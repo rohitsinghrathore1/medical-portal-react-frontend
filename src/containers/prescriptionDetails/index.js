@@ -73,7 +73,7 @@ class PrescriptionDetails extends React.Component {
     const data = this.state.myPrescription;
     return (
       <div>
-        <h2>Prescriptions</h2>
+        <h2>Prescription Details</h2>
 
         {this.state.myPrescription.id ? (
           <Table className="records-table">

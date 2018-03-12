@@ -5,6 +5,7 @@ import Typography from "material-ui/Typography";
 import IconButton from "material-ui/IconButton";
 import MenuIcon from "material-ui-icons/Menu";
 import Drawer from "material-ui/Drawer";
+import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List";
 
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,10 @@ class Header extends React.Component {
       [side]: open
     });
   };
+
+  handleMenuItemClick(path) {
+    this.props.history.push(path);
+  }
 
   render() {
     return (
@@ -44,8 +49,43 @@ class Header extends React.Component {
           open={this.state.left}
           onClose={this.toggleDrawer("left", false)}
         >
-          <div className="side-menu-title">Menu</div>
           <div onClick={this.toggleDrawer("left", false)}>
+            <List component="nav">
+              <ListItem button onClick={() => this.handleMenuItemClick("/")}>
+                <ListItemText primary="Home" />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText
+                  primary="My Prescriptions"
+                  onClick={() => this.handleMenuItemClick("/prescriptions")}
+                />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText
+                  primary="My MedicalRecords"
+                  onClick={() => this.handleMenuItemClick("/medical-records")}
+                />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText
+                  primary="View/Request Prescriptions"
+                  onClick={() =>
+                    this.handleMenuItemClick("/prescriptions-access")}
+                />
+              </ListItem>
+
+              <ListItem button>
+                <ListItemText
+                  primary="Approve-Reject Prescriptions"
+                  onClick={() =>
+                    this.handleMenuItemClick("/approve-reject-prescriptions")}
+                />
+              </ListItem>
+            </List>
+
             <div>
               <Link to="/">Home</Link>
             </div>

@@ -46,7 +46,7 @@ class MedicalRecords extends React.Component {
   render() {
     return (
       <div>
-        <h2>MedicalRecords</h2>
+        <h2>My MedicalRecords</h2>
 
         <Table className="records-table">
           <TableHead>

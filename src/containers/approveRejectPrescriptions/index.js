@@ -66,11 +66,11 @@ class ApproveRejectPrescriptions extends React.Component {
     console.log(res);
   }
 
-  updateAccessStatus(status, id) {
+  updateAccessStatus(status, prescriptionId, requestedById) {
     const reqObj = {
       endPoint: "approveRejectPrescriptionRequest",
       method: "PUT",
-      data: { status, prescriptionId: id },
+      data: { status, prescriptionId, requestedById },
       successCb: this.updateAccessStatusSuccessCb,
       failureCb: this.updateAccessStatusFailureCb
     };
@@ -80,7 +80,7 @@ class ApproveRejectPrescriptions extends React.Component {
   render() {
     return (
       <div>
-        <h2>Prescriptions</h2>
+        <h2>Approve/Reject Prescriptions</h2>
 
         <Table className="records-table">
           <TableHead>
@@ -109,7 +109,8 @@ class ApproveRejectPrescriptions extends React.Component {
                         onClick={() =>
                           this.updateAccessStatus(
                             "accessAllowed",
-                            data.prescription_id.id
+                            data.prescription_id.id,
+                            data.user_id.id
                           )}
                       >
                         Approve
@@ -121,7 +122,8 @@ class ApproveRejectPrescriptions extends React.Component {
                         onClick={() =>
                           this.updateAccessStatus(
                             "accessRequested",
-                            data.prescription_id.id
+                            data.prescription_id.id,
+                            data.user_id.id
                           )}
                       >
                         Reject
