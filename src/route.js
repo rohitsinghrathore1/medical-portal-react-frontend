@@ -1,8 +1,5 @@
-import React from 'react';
-import {
-  Route,
-  Link
-} from 'react-router-dom'
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
 
 import Header from "./components/header";
 
@@ -13,15 +10,49 @@ import PrescriptionsRequest from "./containers/prescriptionsRequest";
 import PrescriptionsDetails from "./containers/prescriptionDetails";
 import ApproveRejectPrescriptions from "./containers/approveRejectPrescriptions";
 
-const RouterComp = ({history}) => (  
-    <div>
-      <Header history={history}/>
-      <Route exact path="/" component={Home} history={history}/>
-      <Route path="/prescriptions" component={Prescriptions}/>
-      <Route path="/medical-records" component={MedicalRecords}/>
-      <Route path="/prescriptions-access" component={PrescriptionsRequest}/>
-      <Route path="/prescription-details/:id" component={PrescriptionsDetails}/>
-      <Route path="/approve-reject-prescriptions" component={ApproveRejectPrescriptions}/>
-    </div>
-)
-export default RouterComp
+const isAuthorized = user => {
+  if (user) {
+    return true;
+  }
+  return false;
+};
+
+const redirect = () => {
+  return <Redirect to={{ pathname: "/" }} />;
+};
+
+const RouterComp = ({ history, setUser, user }) => (
+  <div>
+    <Header history={history} user={user} />
+    <Route
+      exact
+      path="/"
+      render={() => <Home setUser={val => setUser(val)} user={user} />}
+      history={history}
+    />
+    <Route
+      path="/prescriptions"
+      render={() => (isAuthorized(user) ? <Prescriptions /> : redirect())}
+    />
+    <Route
+      path="/medical-records"
+      render={() => (isAuthorized(user) ? <MedicalRecords /> : redirect())}
+    />
+    <Route
+      path="/prescriptions-access"
+      render={() =>
+        isAuthorized(user) ? <PrescriptionsRequest /> : redirect()}
+    />
+    <Route
+      path="/prescription-details/:id"
+      render={() =>
+        isAuthorized(user) ? <PrescriptionsDetails /> : redirect()}
+    />
+    <Route
+      path="/approve-reject-prescriptions"
+      render={() =>
+        isAuthorized(user) ? <ApproveRejectPrescriptions /> : redirect()}
+    />
+  </div>
+);
+export default RouterComp;

@@ -1,5 +1,6 @@
 const apiEndPoints = {
   login: "/login",
+  logout:"/logout",
   getMedicalRecords: "/medical-records",
   getMyPrescriptions: "/users-prescriptions",
   getAllPrescriptions: "/prescriptions",
