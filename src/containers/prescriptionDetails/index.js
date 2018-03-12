@@ -81,7 +81,7 @@ class PrescriptionDetails extends React.Component {
               <TableRow>
                 <TableCell>S.No.</TableCell>
                 <TableCell>Prescription Title</TableCell>
-                <TableCell>Request Access</TableCell>
+                <TableCell>Prescription Details</TableCell>
                 <TableCell>Medical Record Id</TableCell>
               </TableRow>
             </TableHead>
